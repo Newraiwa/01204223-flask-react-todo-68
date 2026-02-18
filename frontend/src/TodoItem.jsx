@@ -34,26 +34,27 @@ function TodoItem({ todo, toggleDone, deleteTodo, addNewComment }) {
               <li key={comment.id}>{comment.message}</li>
             ))}
           </ul>
-
-          <div className="new-comment-forms">
-            <input
-              type="text"
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-            />
-
-            <button
-              type="button"
-              onClick={() => {
-                addNewComment?.(todo.id, newComment);
-                setNewComment("");
-              }}
-            >
-              Add Comment
-            </button>
-          </div>
         </>
       )}
+
+      <div className="new-comment-forms">
+        <input
+          type="text"
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+        />
+
+        <button
+          type="button"
+          onClick={() => {
+            addNewComment?.(todo.id, newComment);
+            setNewComment("");
+          }}
+        >
+          Add Comment
+        </button>
+      </div>
+
     </li>
   )
 }
