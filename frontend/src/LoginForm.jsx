@@ -22,6 +22,7 @@ function LoginForm({loginUrl}) {
       if (response.ok) {
         const data = await response.json();
         login(username, data.access_token);
+        navigate('/');
         console.log(data);
         alert("Login successful.  access token = " + data.access_token);
       } else if (response.status === 401) {
