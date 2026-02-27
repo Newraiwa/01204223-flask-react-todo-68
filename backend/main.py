@@ -89,8 +89,12 @@ depends_on = None
 def create_user(username, full_name, password):
     user = User.query.filter_by(username=username).first()
     if user:
-        click.echo("User already exists.")
+        user.full_name = full_name
+        user.set_password(password)
+        db.session.commit()
+        click.echo(f"User {username} already exists; password updated.")
         return
+
     user = User(username=username, full_name=full_name)
     user.set_password(password)
     db.session.add(user)

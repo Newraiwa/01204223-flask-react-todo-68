@@ -42,9 +42,12 @@ class User(db.Model):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     username: Mapped[str] = mapped_column(String(100), unique=True)
     full_name: Mapped[str] = mapped_column(String(200))
-    hashed_password: Mapped[str] = mapped_column(String(100))
+    hashed_password: Mapped[str] = mapped_column(String(128))
     def set_password(self, password):
-        self.hashed_password = generate_password_hash(password)
+        hashed = generate_password_hash(password)
+        if isinstance(hashed, bytes):
+            hashed = hashed.decode("utf-8")
+        self.hashed_password = hashed
 
     def check_password(self, password):
         return check_password_hash(self.hashed_password, password)
