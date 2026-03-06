@@ -10,12 +10,15 @@ from flask_jwt_extended import JWTManager
 app = Flask(__name__)
 CORS(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
-    "SQLALCHEMY_DATABASE_URI",
-    "mysql://USERNAME:PASSWORD@p1.secondtrain.org/DATABASENAME"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
+    'SQLALCHEMY_DATABASE_URI',
+    'sqlite:///todos.db'
 )
 
-app.config['JWT_SECRET_KEY'] = 'fdsjkfjioi2rjshr2345hrsh043j5oij5545'
+app.config['JWT_SECRET_KEY'] = os.getenv(
+    'JWT_SECRET_KEY',
+    'fdslkfjsdlkufewhjroiewurewrew'
+)
 
 jwt = JWTManager(app)
 
